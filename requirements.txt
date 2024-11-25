@@ -1,0 +1,10 @@
+pandas==1.5.3               # Data manipulation and analysis
+numpy==1.23.5               # Numerical operations
+scikit-learn==1.2.1         # Machine learning algorithms and utilities
+nltk==3.8.1                 # Natural Language Toolkit (tokenization, stopword removal, etc.)
+spacy==3.5.0                # NLP library for advanced text processing
+matplotlib==3.7.1           # Data visualization (for plotting model performance or data analysis)
+seaborn==0.12.2             # Data visualization (for statistical graphics)
+regex==2023.12.25            # Regular expressions (for text cleaning)
+joblib==1.2.0               # For saving and loading models (e.g., pickling the trained model)
+tqdm==4.65.0                # Progress bar (optional, useful in large loops)
