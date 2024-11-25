@@ -24,8 +24,8 @@ This project builds a machine learning model to classify SMS messages as either 
    pip install -r requirements.txt
 ```
 
-4. Download necessary NLTK datasets (optional, but required for text preprocessing):
+4. Download Necessary Data and Dependencies:
 
 ```bash
-   python download_nltk_data.py
+   python3 scripts/download_nltk_data.py
 ```
