@@ -3,10 +3,10 @@ import string
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
+from .helpers import load_data
 
-def load_data(file_path):
-    df = pd.read_csv(file_path, encoding='latin1')
-    return df
+def remove_non_ascii(text):
+    return ''.join([char for char in text if ord(char) < 128])
 
 def clean_data(df):
     stop_words = set(stopwords.words('english'))
@@ -15,22 +15,17 @@ def clean_data(df):
     df = df.rename(columns={'v1': 'label', 'v2': 'sms'})
     # Convert to lowercase and remove puncuation
     df['sms'] = df['sms'].str.lower().str.translate(str.maketrans('', '', string.punctuation))
+    # Remove non-ASCII characters
+    df['sms'] = df['sms'].apply(remove_non_ascii)
     # Tokenize and remove stopwords
     df['sms_tokens'] = df['sms'].apply(lambda x: [word for word in word_tokenize(x) if word not in stop_words])
     df['cleaned_sms'] = df['sms_tokens'].apply(lambda x: ' '.join(x))
-
+    # print(df['label'].value_counts())
     return df
 
-def write_clean_data(clean_df):
-    output_df = clean_df[['label', 'cleaned_sms']]
-    output_df.to_csv('../data/preprocessed_sms.csv', index=False, mode='w')
-
-def main():
-    df = load_data('../data/raw_sms.csv')
+def pre_process_data(filepath):
+    df = load_data(filepath)
     clean_df = clean_data(df)
-    write_clean_data(clean_df)
-
-if __name__ == "__main__":
-    main()
+    return clean_df
 
 
