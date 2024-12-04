@@ -24,8 +24,15 @@ This project builds a machine learning model to classify SMS messages as either 
    pip install -r requirements.txt
 ```
 
-4. Download Necessary Data and Dependencies:
+4. Download necessary data and dependencies:
 
 ```bash
    python3 scripts/download_nltk_data.py
+```
+
+5. Run the model
+   This will execute the model, allowing you to classify SMS messages as either spam or ham.
+
+```bash
+   python3 run.py
 ```

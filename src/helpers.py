@@ -7,3 +7,4 @@ def load_data(file_path):
 def write_data(df,filepath, sms_type):
     output_df = df[['label', sms_type]]
     output_df.to_csv(filepath, index=False, mode='w')
+    print(f"Data written to {filepath}")

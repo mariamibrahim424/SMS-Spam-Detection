@@ -14,12 +14,11 @@ def clean_data(df):
     df = df.dropna(axis=1, how='any')
     df = df.rename(columns={'v1': 'label', 'v2': 'sms'})
     # Convert to lowercase and remove puncuation
-    df['sms'] = df['sms'].str.lower().str.translate(str.maketrans('', '', string.punctuation))
+    df['cleaned_sms'] = df['sms'].str.lower().str.translate(str.maketrans('', '', string.punctuation))
     # Remove non-ASCII characters
-    df['sms'] = df['sms'].apply(remove_non_ascii)
+    df['cleaned_sms'] = df['cleaned_sms'].apply(remove_non_ascii)
     # Tokenize and remove stopwords
-    df['sms_tokens'] = df['sms'].apply(lambda x: [word for word in word_tokenize(x) if word not in stop_words])
-    df['cleaned_sms'] = df['sms_tokens'].apply(lambda x: ' '.join(x))
+    df['cleaned_sms'] = df['cleaned_sms'].apply(lambda x: ' '.join(word for word in x.split() if word not in stop_words))
     # print(df['label'].value_counts())
     return df
 
